@@ -1,12 +1,11 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/require-await */
 // src/config/typeorm.config.ts
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import {
   TypeOrmModuleAsyncOptions,
   TypeOrmModuleOptions,
 } from '@nestjs/typeorm';
-import { User } from '../users/entities/user.entity'; // Adjust path as needed
-import { Post } from '../posts/entities/post.entity'; // Adjust path as needed
 
 export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
@@ -21,7 +20,7 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
       username: configService.get<string>('DB_USERNAME'),
       password: configService.get<string>('DB_PASSWORD'),
       database: configService.get<string>('DB_DATABASE'),
-      entities: [User, Post], // Add all your entities here
+      entities: [], // Add all your entities here
       synchronize: true, // !! IMPORTANT: Set to false in production, use migrations instead
       logging: configService.get<string>('NODE_ENV') !== 'production', // Log SQL in dev
       autoLoadEntities: true, // Recommended if entities are defined in feature modules
